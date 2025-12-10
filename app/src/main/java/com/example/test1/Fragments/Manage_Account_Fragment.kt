@@ -1,55 +1,92 @@
 package com.example.test1.Fragments
 
+import Account
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test1.R
+import com.example.test1.databinding.FragmentManageAccountBinding
+import com.example.test1.adapters.AccountAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Manage_Account_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Manage_Account_Fragment : Fragment() {
 
+    private var _binding: FragmentManageAccountBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var accountAdapter: AccountAdapter
+    private val accountList = mutableListOf<Account>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_account, container, false)
+    ): View {
+        _binding = FragmentManageAccountBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Manage_Account_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Manage_Account_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+        loadAccounts()
+        setupClickListeners()
+    }
+
+    private fun setupRecyclerView() {
+        accountAdapter = AccountAdapter(accountList) { account ->
+            // Click vào account -> mở EditAccountFragment
+            val bundle = Bundle().apply {
+                putString("account_id", account.id)
             }
+//            val editFragment = EditAccountFragment().apply {
+//                arguments = bundle
+//            }
+//            replaceFragment(editFragment)
+        }
+
+        binding.rvAccounts.apply {
+            adapter = accountAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun loadAccounts() {
+        accountList.clear()
+        accountList.addAll(getSampleAccounts())
+        accountAdapter.notifyDataSetChanged()
+    }
+
+    private fun setupClickListeners() {
+        // Thêm tài khoản mới
+//        binding.btnAddQuick.setOnClickListener {
+//            replaceFragment(AddPasswordFragment())
+//        }
+
+        // Search (sau này bạn thêm filter)
+        binding.etSearch.setOnClickListener {
+            binding.etSearch.requestFocus()
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment) // đảm bảo activity có FrameLayout này
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun getSampleAccounts() = listOf(
+        Account("Facebook", "nguyenvana@gmail.com", "fb_user123", "••••••••"),
+        Account("Gmail", "nguyenvana@gmail.com", "nguyenvana123", "••••••••"),
+        Account("Shopee", "0851234567", "shopee_user", "••••••••"),
+        Account("Bank Vietcombank", "0851234567", "vcb_user", "••••••••")
+    )
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
