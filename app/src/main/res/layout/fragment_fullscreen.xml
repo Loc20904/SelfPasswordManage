@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:background="@color/white"
+    android:theme="@style/ThemeOverlay.Test1.FullscreenContainer"
+    tools:context=".Fragments.ui.FullscreenFragment">
+
+    <!-- Tiêu đề lớn rõ ràng -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QUẢN LÝ MẬT KHẨU"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginBottom="48dp"
+        android:letterSpacing="0.05" />
+
+    <!-- Nút 1: XEM DANH SÁCH MẬT KHẨU -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnManagePasswords"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="XEM MẬT KHẨU"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/light_blue_A200"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_manage_accounts_24"
+            app:iconSize="36dp"
+            app:iconTint="@android:color/black"
+            app:iconGravity="start"
+            app:iconPadding="24dp"
+            android:minHeight="100dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Nút 2: THÊM MẬT KHẨU MỚI -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddPassword"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="THÊM MỚI"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/light_green"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_add_30"
+            app:iconSize="36dp"
+            app:iconTint="@android:color/black"
+            app:iconGravity="start"
+            android:minHeight="100dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Nút 3: TỰ ĐỘNG ĐIỀN MẬT KHẨU -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAutoFillSettings"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="TỰ ĐỘNG ĐIỀN"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/light_orange"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_hdr_auto_30"
+            app:iconSize="36dp"
+            app:iconTint="@android:color/black"
+            app:iconGravity="start"
+            android:minHeight="100dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Nút 4: ĐỔI MÃ KHÓA -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChangePin"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="ĐỔI MÃ KHÓA"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@android:color/holo_red_dark"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_change_circle_30"
+            app:iconSize="36dp"
+            app:iconTint="@android:color/white"
+            app:iconGravity="start"
+            android:minHeight="100dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

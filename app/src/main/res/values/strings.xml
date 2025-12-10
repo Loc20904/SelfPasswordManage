@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Android_Application</string>
+    <string name="Str_button">Button</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="fingerprint">Fingerprint</string>
+    <string name="prompt_pin">. . . . . . . .</string>
+    <string name="str_FingerText">Sử dụng mở khóa bằng \"VÂN TAY\"\n(Nhấn vào biểu tượng bên phải)</string>
+    <string name="visible_button">Hiện mật mã Pin</string>
+    <string name="invalid_pin">Mã PIN không đúng.\n Vui Lòng nhập lại.</string>
+    <string name="enter_pin_to_unlock">Nhập mã Pin đễ mở khóa</string>
+    <string name="str_VisibleText">Nhấn vào hình bên phải để hiển thị mã Pin.\n      Nhấn 1 lần nữa để ẩn mã Pin.\n   (Cẩn thận lộ mã Pin với người ngoài)</string>
+    <string name="change_pin">Đổi mã PIN</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="old_pin">Mã Pin cũ( nhập vào 6 số)</string>
+    <string name="new_pin">Mã Pin mới( nhập vào 6 số)</string>
+    <string name="confirm_new_pin">Nhập lại mã Pin mới( nhập vào 6 số)</string>
+    <string name="save_pin">Xác Nhận đổi</string>
+    <string name="old_pin_wrong">Mã Pin cũ không chính xác.</string>
+    <string name="pin_not_match">Mã Pin mới và nhập lại mã Pin mới không trùng khớp.</string>
+    <string name="pin_saved">Đổi mã Pin thành công.</string>
+    <string name="back_main_screen">Quay lại màn hình chính</string>
+
+</resources>
