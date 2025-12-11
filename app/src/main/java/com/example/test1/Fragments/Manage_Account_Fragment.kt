@@ -2,6 +2,8 @@ package com.example.test1.Fragments
 
 import Account
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test1.R
 import com.example.test1.databinding.FragmentManageAccountBinding
 import com.example.test1.adapters.AccountAdapter
+import com.example.test1.utils.FileManager
 
 class Manage_Account_Fragment : Fragment() {
 
@@ -55,7 +58,7 @@ class Manage_Account_Fragment : Fragment() {
 
     private fun loadAccounts() {
         accountList.clear()
-        accountList.addAll(getSampleAccounts())
+        accountList.addAll(FileManager.loadAccounts(requireContext()))
         accountAdapter.notifyDataSetChanged()
     }
 
@@ -66,9 +69,24 @@ class Manage_Account_Fragment : Fragment() {
 //        }
 
         // Search (sau này bạn thêm filter)
-        binding.etSearch.setOnClickListener {
-            binding.etSearch.requestFocus()
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                filterAccounts(s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+    private fun filterAccounts(query: String) {
+        val allAccounts = FileManager.loadAccounts(requireContext())
+        val filtered = allAccounts.filter { account ->
+            account.appName.contains(query, ignoreCase = true) ||
+                    account.username.contains(query, ignoreCase = true) ||
+                    account.accountId.contains(query, ignoreCase = true)
         }
+        accountList.clear()
+        accountList.addAll(filtered)
+        accountAdapter.notifyDataSetChanged()
     }
 
     private fun replaceFragment(fragment: Fragment) {
