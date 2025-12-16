@@ -7,6 +7,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test1.R
@@ -40,14 +44,8 @@ class Manage_Account_Fragment : Fragment() {
 
     private fun setupRecyclerView() {
         accountAdapter = AccountAdapter(accountList) { account ->
-            // Click vào account -> mở EditAccountFragment
-            val bundle = Bundle().apply {
-                putString("account_id", account.id)
-            }
-//            val editFragment = EditAccountFragment().apply {
-//                arguments = bundle
-//            }
-//            replaceFragment(editFragment)
+            // Khi bấm vào 1 account
+            showBiometricForAccount(account)
         }
 
         binding.rvAccounts.apply {
@@ -55,6 +53,80 @@ class Manage_Account_Fragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
     }
+
+    private fun showBiometricForAccount(account: Account) {
+        val executor = ContextCompat.getMainExecutor(requireContext())
+
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Xác thực để xem mật khẩu")
+            .setSubtitle("Dùng vân tay để mở tài khoản ${account.appName}")
+            .setNegativeButtonText("Hủy")
+            .build()
+
+        val biometricPrompt = BiometricPrompt(
+            this,
+            executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    showAccountDialog(account)
+                }
+
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(requireContext(), "Có lỗi xảy ra !", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+
+        biometricPrompt.authenticate(promptInfo)
+    }
+
+    private fun showAccountDialog(account: Account) {
+        val message = """
+        Ứng dụng: ${account.appName}
+        Email/SĐT: ${account.username}
+        Tài khoản: ${account.accountId}
+        Mật khẩu: ${account.password}
+    """.trimIndent()
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Chi tiết tài khoản")
+            .setMessage(message)
+            .setPositiveButton("Đóng", null)
+            .setNegativeButton("Xóa tài khoản") { _, _ ->
+                confirmDeleteAccount(account)
+            }
+            .show()
+    }
+    private fun confirmDeleteAccount(account: Account) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Xóa tài khoản")
+            .setMessage("Bạn có chắc muốn xóa tài khoản ${account.appName}?")
+            .setPositiveButton("XÓA") { _, _ ->
+                deleteAccount(account)
+            }
+            .setNegativeButton("Hủy", null)
+            .show()
+    }
+
+    private fun deleteAccount(account: Account) {
+        // Xóa trong file
+        val currentAccounts = FileManager.loadAccounts(requireContext())
+        val updatedAccounts = currentAccounts.filter { it.id != account.id }
+        FileManager.saveAccounts(requireContext(), updatedAccounts)
+
+        // Nếu đang có list trên RecyclerView:
+        accountList.removeAll { it.id == account.id }
+        accountAdapter.notifyDataSetChanged()
+
+        Toast.makeText(
+            requireContext(),
+            "✅ Đã xóa ${account.appName}",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
 
     private fun loadAccounts() {
         accountList.clear()
@@ -98,9 +170,7 @@ class Manage_Account_Fragment : Fragment() {
 
     private fun getSampleAccounts() = listOf(
         Account("Facebook", "nguyenvana@gmail.com", "fb_user123", "••••••••"),
-        Account("Gmail", "nguyenvana@gmail.com", "nguyenvana123", "••••••••"),
-        Account("Shopee", "0851234567", "shopee_user", "••••••••"),
-        Account("Bank Vietcombank", "0851234567", "vcb_user", "••••••••")
+        Account("Gmail", "nguyenvana@gmail.com", "nguyenvana123", "••••••••")
     )
 
     override fun onDestroyView() {

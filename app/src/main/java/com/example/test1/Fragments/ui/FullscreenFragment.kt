@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.test1.MainActivity
 import com.example.test1.databinding.FragmentFullscreenBinding
@@ -47,7 +48,7 @@ class FullscreenFragment : Fragment() {
 
         val btnAuto = view.findViewById<Button>(R.id.btnAutoFillSettings)
         btnAuto.setOnClickListener {
-
+            Toast.makeText(requireContext(), "Tính năng đang phát triển.", Toast.LENGTH_SHORT).show()
         }
     }
 
