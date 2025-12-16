@@ -91,6 +91,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
+            android:alpha="0.5"
             app:backgroundTint="@color/light_orange"
             app:cornerRadius="20dp"
             app:icon="@drawable/baseline_hdr_auto_30"

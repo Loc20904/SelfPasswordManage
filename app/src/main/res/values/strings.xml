@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android_Application</string>
+    <string name="app_name">Just Password</string>
     <string name="Str_button">Button</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
