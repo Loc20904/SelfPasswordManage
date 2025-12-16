@@ -43,11 +43,16 @@ class LoginFragment : Fragment() {
         binding.btnFingerprint.setOnClickListener {
             (activity as? MainActivity)?.startBiometric()
         }
+        binding.tvFingerText.setOnClickListener {
+            (activity as? MainActivity)?.startBiometric()
+        }
 
         binding.btnTogglePin.setOnClickListener {
             togglePinVisibility()
         }
-
+        binding.tvVisibleText.setOnClickListener {
+            togglePinVisibility()
+        }
         setupPinInputs()
 
     }

@@ -111,24 +111,25 @@
     <!-- Hàng: hiển thị/ẩn PIN -->
     <LinearLayout
         android:id="@+id/VisibleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="363dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/pinContainer"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pinContainer">
 
         <TextView
             android:id="@+id/tvVisibleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
             android:text="@string/str_VisibleText"
-            android:textSize="17sp"
             android:textColor="@color/black"
-            android:paddingLeft="4dp" />
+            android:textSize="17sp" />
 
         <ImageButton
             android:id="@+id/btnTogglePin"
@@ -141,6 +142,7 @@
             app:tint="@color/light_blue_900" />
 
     </LinearLayout>
+
 
     <!-- Hàng: gợi ý + nút vân tay -->
     <LinearLayout
